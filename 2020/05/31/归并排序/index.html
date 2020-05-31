@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wustzhh.github.io">
-  <title>&#39;my-first-blog&#39; | Hexo</title>
+  <title>&#39;简单排序&#39; | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hello zhhBlog">
+  <meta name="description" content="这是有关归并排序的简单介绍，适合入门级新手">
 <meta property="og:type" content="article">
-<meta property="og:title" content="&#39;my-first-blog&#39;">
-<meta property="og:url" content="https://wustzhh.github.io/2020/05/31/my-first-blog/index.html">
+<meta property="og:title" content="&#39;简单排序&#39;">
+<meta property="og:url" content="https://wustzhh.github.io/2020/05/31/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Hello zhhBlog">
+<meta property="og:description" content="这是有关归并排序的简单介绍，适合入门级新手">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-31T06:37:53.000Z">
-<meta property="article:modified_time" content="2020-05-31T08:07:53.917Z">
+<meta property="article:published_time" content="2020-05-31T08:30:03.000Z">
+<meta property="article:modified_time" content="2020-05-31T08:47:39.677Z">
 <meta property="article:author" content="zhh">
-<meta property="article:tag" content="闲聊">
-<meta property="article:tag" content="第一次">
+<meta property="article:tag" content="排序">
+<meta property="article:tag" content="归并排序">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -135,29 +135,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-my-first-blog" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-归并排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      &#39;my-first-blog&#39;
+      &#39;简单排序&#39;
     </h1>
   
 
         
-        <a href="/2020/05/31/my-first-blog/" class="archive-article-date">
-  	<time datetime="2020-05-31T06:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
+        <a href="/2020/05/31/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-05-31T08:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Hello-zhhBlog"><a href="#Hello-zhhBlog" class="headerlink" title="Hello zhhBlog"></a>Hello zhhBlog</h2><a id="more"></a>
+        <h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><a id="more"></a>
 
-<h2 id="Say-Hello"><a href="#Say-Hello" class="headerlink" title="Say Hello"></a>Say Hello</h2><iframe frameborder="yes" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1448084090&auto=1&height=66"></iframe>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><blockquote>
+<ul>
+<li>在C语言的教材中， 介绍了冒泡排序和选择排序等几种简单的排序。 操作简单， 容易理解，但是时间复杂度却比较高。今天在这里介绍另一种简单排序 -归并排序， 听起来就有B格。</li>
+</ul>
+</blockquote>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><blockquote>
+<ul>
+<li>归并排序的优点简单来讲就是稳稳的快。</li>
+<li>首先归并排序的时间复杂度是nlog(n)， 比起n^2的冒泡排序快乐不少</li>
+<li>其次它稳定，快排的时间复杂度也是nlog(n), 但是当数组完全逆序的情况下， 快排的时间复杂度就会和冒泡排序一样变成n^2了， 然而归并排序则是稳稳的nlog(n)，而且我个人觉得归并排序好理解一点。</li>
+</ul>
+</blockquote>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><blockquote>
+<ul>
+<li>归并排序的原理就是二分法， 分而治之。 大化小， 小化了。</li>
+</ul>
+</blockquote>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i, a, n) for(int i = a; i &lt; n; i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> res(i, a, n) for(int i = a - 1; i &gt;= n; i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10020</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;       //这个是模板， 很强大的东西</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">MergeSort</span>(<span class="title">T</span> *<span class="title">l</span>, <span class="title">T</span> *<span class="title">m</span>, <span class="title">T</span> *<span class="title">r</span>)&#123;</span></span><br><span class="line">    T *x = l, *y = m;</span><br><span class="line">    <span class="keyword">int</span> len = r - l;</span><br><span class="line">    T *a = <span class="keyword">new</span> T[len + <span class="number">5</span>], index = <span class="number">0</span>;</span><br><span class="line"><span class="comment">/**************************************************/</span></span><br><span class="line"><span class="comment">/**/</span><span class="keyword">while</span>(x &lt; m &amp;&amp; y &lt; r)&#123;                      <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**/</span><span class="keyword">if</span>(*x &lt; *y)     a[index++] = *(x++);        <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**/</span>    <span class="keyword">else</span>            a[index++] = *(y++);    <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**/</span>&#125;                                           <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**/</span>                                            <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**/</span><span class="keyword">while</span>(x &lt; m)        a[index++] = *(x++);    <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**/</span><span class="keyword">while</span>(y &lt; r)        a[index++] = *(y++);    <span class="comment">/**/</span></span><br><span class="line"><span class="comment">/**************************************************/</span></span><br><span class="line">    <span class="comment">/*以上这段代码的思路， 说的简单的就是， 一次遍历排好序*/</span></span><br><span class="line">    <span class="comment">/*比如说当传进来的数组为&#123;2， 3， 1， 4&#125;的时候就会排成&#123;1， 2， 3， 4&#125;*/</span></span><br><span class="line">    <span class="comment">/*因为1 &lt; 2， 所以先放1， 然后2 &lt; 4， 再放2， 3 &lt; 4， 放3， 然后退出第一个循环， 在第三个循环里面放4， 然后就排好了*/</span></span><br><span class="line">    <span class="comment">/*但是， 如果数组是&#123;3， 2， 4， 1&#125;的时候就会排成&#123;3， 2， 4， 1&#125;， 没有变化， 就不会得到我们想要的功能*/</span></span><br><span class="line">    <span class="comment">/*然而并不会出现这种情况， 因为我们会先把&#123;3， 2&#125;排成&#123;2， 3&#125;， &#123;4， 1&#125;排成&#123;1， 4&#125;*/</span></span><br><span class="line">    <span class="comment">/*这就是分治的nb之处了*/</span></span><br><span class="line"></span><br><span class="line">    rep(i, <span class="number">0</span>, index)    l[i] = a[i];</span><br><span class="line">    <span class="comment">/*然后把原数组局部覆盖就好了*/</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">sort</span>(<span class="title">T</span> *<span class="title">l</span>, <span class="title">T</span> *<span class="title">r</span>)&#123;</span><span class="comment">//首先取名字一定要有B格， 我不加algorithm头文件， 但我依旧可以用sort， 而且还是绿色， 这就很有B格</span></span><br><span class="line">    T *m = l + (r - l) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(r - l &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        sort(l, m);     <span class="comment">//每次都分成两部分， 大化小</span></span><br><span class="line">        sort(m, r);     <span class="comment">//当r - l &lt;= 1 的时候， 即足够小的时候， 就不分了， 小化了</span></span><br><span class="line">    &#125;</span><br><span class="line">    MergeSort(l, m, r); <span class="comment">//sort体现的是分治的思想， MergeSort则是操作</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> a[N];</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n)&#123;</span><br><span class="line">        rep(i, <span class="number">0</span>, n)    <span class="built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">        sort(a, a + n);</span><br><span class="line">        rep(i, <span class="number">0</span>, n)    <span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;      <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">1 6 2 7 5 3 1 2 4 1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">1627531241</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">8</span></span><br><span class="line"><span class="comment">德玛西亚</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">给了几组数据， 第三组理所当然会出现问题</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
       
 
@@ -202,11 +219,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">闲聊</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">第一次</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">归并排序</a>
         		</li>
       		
 		</ul>
@@ -262,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://wustzhh.github.io/2020/05/31/my-first-blog/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wustzhh.github.io/2020/05/31/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,15 +293,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/31/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          &#39;简单排序&#39;
-        
-      </div>
-    </a>
   
+    <a href="/2020/05/31/my-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">&#39;my-first-blog&#39;</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -309,7 +322,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-zhhBlog"><span class="toc-number">1.</span> <span class="toc-text">Hello zhhBlog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Say-Hello"><span class="toc-number">2.</span> <span class="toc-text">Say Hello</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#归并排序"><span class="toc-number">1.</span> <span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优点"><span class="toc-number">1.2.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原理"><span class="toc-number">1.3.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">1.4.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
