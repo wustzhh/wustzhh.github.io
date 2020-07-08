@@ -131,6 +131,91 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-播放音乐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/08/C-%E6%92%AD%E6%94%BE%E9%9F%B3%E4%B9%90/">C++播放音乐</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/08/C-%E6%92%AD%E6%94%BE%E9%9F%B3%E4%B9%90/" class="archive-article-date">
+  	<time datetime="2020-07-08T15:08:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h1 id="C-播放音乐"><a href="#C-播放音乐" class="headerlink" title="C++播放音乐"></a><center>C++播放音乐</center></h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mmsystem.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib,<span class="meta-string">"winmm.lib"</span>)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这三行是不可或缺的，最好顺序都不要变<br>如果运行的时候报错的话，还需要自己去找 MinGW\\lib\\libwinmm.a<br>codeblocks还需要一些设置，打开settings -&gt; Compiler -&gt; Global compiler settings -&gt; linker settings<br>点击add，浏览找到libwinmma.a然后一路ok就好</p>
+</blockquote>
+<h2 id="同级目录准备"><a href="#同级目录准备" class="headerlink" title="同级目录准备"></a>同级目录准备</h2><blockquote>
+<p>创建一个txt保存歌曲信息，创建一个文件夹Music用来保存MP3文件<br>其中txt文件需要用ANSI编码，不然会有乱码，运行就会出错<br>但是改了编码之后，我就只能用电脑自带的文本编辑器看了，sublime打开会是乱码，烦的雅痞<br>txt里的信息是自己手动添加的，歌曲名一定要和Music里的文件一样，这里有亿点点坑，因为我懒得找度娘了</p>
+</blockquote>
+<h2 id="然后，上代码"><a href="#然后，上代码" class="headerlink" title="然后，上代码"></a>然后，上代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mmsystem.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib,<span class="meta-string">"winmm.lib"</span>)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Music</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">string</span> path;</span><br><span class="line">    <span class="built_in">string</span> name;</span><br><span class="line">    <span class="built_in">string</span> singerName;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Music(<span class="built_in">string</span> path, <span class="built_in">string</span> name, <span class="built_in">string</span> singerName): path(path), name(name), singerName(singerName)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SetPath</span><span class="params">(<span class="built_in">string</span> pat)</span> </span>&#123; path = pat; &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">GetPath</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> path; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">SetName</span><span class="params">(<span class="built_in">string</span> nam)</span> </span>&#123; name = nam; &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">GetName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> name; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">SetSingerName</span><span class="params">(<span class="built_in">string</span> <span class="built_in">sin</span>)</span> </span>&#123; singerName = <span class="built_in">sin</span>; &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">GetSingerName</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> singerName; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MusicManager</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Music&gt; music;</span><br><span class="line">	<span class="built_in">string</span> PlayingMusic;</span><br><span class="line">	<span class="built_in">string</span> playingMusicPath;</span><br><span class="line">	<span class="keyword">char</span> ppath[<span class="number">50</span>];</span><br><span class="line">	MCI_OPEN_PARMS op;	<span class="comment">///打开MCI设备</span></span><br><span class="line">	MCI_PLAY_PARMS pp;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">///开始运行</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    Init();</span><br><span class="line">	    ReadMusicList();</span><br><span class="line">        <span class="comment">///只要主菜单没有quit就一直运行</span></span><br><span class="line">	    <span class="keyword">while</span> (Menu() != <span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///主菜单</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">Menu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    system(<span class="string">"cls"</span>);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press z playing/change music"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press x inquire music"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"prsss q quit"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">			<span class="keyword">int</span> key = getch();</span><br><span class="line">			<span class="keyword">if</span> (key == <span class="string">'z'</span>)	&#123;</span><br><span class="line">				PlaySongsMenu();</span><br><span class="line">				<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (key == <span class="string">'x'</span>) &#123;</span><br><span class="line">				ShowMusicList();</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; <span class="string">"press q quit"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                <span class="keyword">while</span> (getch() != <span class="string">'q'</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (key == <span class="string">'q'</span>)		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///选歌环节</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ChooseMusic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ShowMusicList();</span><br><span class="line">        <span class="keyword">int</span> id;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"input music id:"</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; id;</span><br><span class="line">        mciSendCommand (op.wDeviceID, MCI_STOP, <span class="literal">NULL</span>, (DWORD)&amp;pp);</span><br><span class="line">        ChangeMusic(id - <span class="number">1</span>);</span><br><span class="line">        mciSendCommand (op.wDeviceID, MCI_PLAY, MCI_FROM, (DWORD)&amp;pp);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///听歌界面</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">PlaySongsMenu</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    ChooseMusic();</span><br><span class="line">	    system(<span class="string">"cls"</span>);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Playing Music:"</span> &lt;&lt; PlayingMusic &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press w playing"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press p pause"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press r resume"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press s stop"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press q quit"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"press c change music"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (kbhit()) &#123;</span><br><span class="line">                <span class="keyword">int</span> key = getch();</span><br><span class="line">                <span class="keyword">if</span> (key == <span class="string">'q'</span>)		<span class="keyword">return</span> ;</span><br><span class="line">                <span class="keyword">if</span> (key == <span class="string">'w'</span>) &#123;</span><br><span class="line">                    mciSendCommand (op.wDeviceID, MCI_PLAY, MCI_FROM, (DWORD)&amp;pp);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (key == <span class="string">'r'</span>) &#123;</span><br><span class="line">                    mciSendCommand (op.wDeviceID, MCI_RESUME, <span class="literal">NULL</span>, (DWORD)&amp;pp);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (key == <span class="string">'s'</span>) &#123;</span><br><span class="line">                    mciSendCommand (op.wDeviceID, MCI_STOP, <span class="literal">NULL</span>, (DWORD)&amp;pp);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (key == <span class="string">'p'</span>) &#123;</span><br><span class="line">                    mciSendCommand (op.wDeviceID, MCI_PAUSE, <span class="literal">NULL</span>, (DWORD)&amp;pp);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (key == <span class="string">'c'</span>) &#123;</span><br><span class="line">                    PlaySongsMenu();</span><br><span class="line">                    <span class="keyword">return</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///初始化</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    op.dwCallback = <span class="literal">NULL</span>;</span><br><span class="line">	    op.lpstrAlias = <span class="literal">NULL</span>;</span><br><span class="line">	    op.lpstrDeviceType = (<span class="string">"MPEGAudio"</span>);     <span class="comment">///设备类型，大多数文件可以这样设置</span></span><br><span class="line">	    <span class="comment">///op.lpstrElementName = (ToChars(playingMusicPath));   ///文件路径</span></span><br><span class="line">	    op.wDeviceID = <span class="literal">NULL</span>;  <span class="comment">///打开设备成功以后保存这个设备号备用</span></span><br><span class="line"></span><br><span class="line">	    pp.dwCallback = <span class="literal">NULL</span>;</span><br><span class="line">    	pp.dwFrom = <span class="number">0</span>;                       <span class="comment">//开始播放的位置</span></span><br><span class="line"></span><br><span class="line">    	op.lpstrElementName = (<span class="string">"E:\\best.mp3"</span>);</span><br><span class="line">    	mciSendCommand(<span class="literal">NULL</span>,MCI_OPEN,MCI_OPEN_ELEMENT ,(DWORD)&amp;op);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///string转char数组，lpstrElementName是char*这我是真没想到</span></span><br><span class="line">	<span class="function"><span class="keyword">char</span>* <span class="title">ToChars</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">strcpy</span>(ppath, str.c_str());</span><br><span class="line">		<span class="keyword">return</span> ppath;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///读取music_list.txt中的歌单信息</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ReadMusicList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		fstream file;</span><br><span class="line">		file.open(<span class="string">"music_list.txt"</span>, ios::in);</span><br><span class="line">		<span class="built_in">string</span> a, b;</span><br><span class="line">		<span class="keyword">while</span> (file &gt;&gt; a &gt;&gt;b) &#123;</span><br><span class="line">			music.push_back(Music(<span class="string">"Music\\"</span> + a + <span class="string">".mp3"</span>, a, b));</span><br><span class="line">		&#125;</span><br><span class="line">		file.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///展示歌单</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ShowMusicList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		system(<span class="string">"cls"</span>);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"total "</span> &lt;&lt; music.size() &lt;&lt; <span class="string">" musics"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; music.size(); i++) &#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; music[i].GetName() &lt;&lt; <span class="string">" "</span> &lt;&lt; music[i].GetSingerName() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">///切换歌曲</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ChangeMusic</span><span class="params">(<span class="keyword">int</span> ID)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ID &gt;= music.size()) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        playingMusicPath = music[ID].GetPath();</span><br><span class="line">        op.lpstrElementName = ToChars(playingMusicPath);</span><br><span class="line">        PlayingMusic = music[ID].GetName();</span><br><span class="line">        pp.dwFrom = <span class="number">0</span>;</span><br><span class="line">        mciSendCommand(<span class="literal">NULL</span>,MCI_OPEN,MCI_OPEN_ELEMENT ,(DWORD)&amp;op);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	MusicManager mm;</span><br><span class="line">	mm.Start();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">音乐</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/08/C-%E6%92%AD%E6%94%BE%E9%9F%B3%E4%B9%90/">Read More >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-最短路Dijkstral算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -539,84 +624,6 @@
 
 
   
-    <article id="post-my-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/31/my-first-blog/">&#39;my-first-blog&#39;</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/31/my-first-blog/" class="archive-article-date">
-  	<time datetime="2020-05-31T06:37:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Hello-zhhBlog"><a href="#Hello-zhhBlog" class="headerlink" title="Hello zhhBlog"></a>Hello zhhBlog</h2>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">闲聊</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">第一次</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/31/my-first-blog/">Read More >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -731,14 +738,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">第一次</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">博弈论</a>
               </li>
              
@@ -776,6 +775,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">音乐</a>
               </li>
             
             <div class="clearfix"></div>
