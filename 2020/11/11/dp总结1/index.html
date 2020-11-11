@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wustzhh.github.io">
-  <title>Tag: 图论 | zhh&#39;s Blogs</title>
+  <title>dp总结1 | zhh&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhh&#39;s Blogs">
-<meta property="og:url" content="https://wustzhh.github.io/tags/%E5%9B%BE%E8%AE%BA/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="dp总结1">
+<meta property="og:url" content="https://wustzhh.github.io/2020/11/11/dp%E6%80%BB%E7%BB%931/index.html">
 <meta property="og:site_name" content="zhh&#39;s Blogs">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wustzhh.github.io/2020/11/11/dp%E6%80%BB%E7%BB%931/kangna.jpg">
+<meta property="article:published_time" content="2020-11-11T06:30:11.000Z">
+<meta property="article:modified_time" content="2020-11-11T08:42:27.963Z">
 <meta property="article:author" content="zhh">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="dp">
+<meta property="article:tag" content="背包">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wustzhh.github.io/2020/11/11/dp%E6%80%BB%E7%BB%931/kangna.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhh&#39;s Blogs" type="application/atom+xml">
   
@@ -129,36 +136,130 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-dp总结1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/05/%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstral%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-07-05T02:13:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/05/%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstral%E7%AE%97%E6%B3%95/">最短路Dijkstral算法</a>
+    <h1 class="article-title" itemprop="name">
+      dp总结1
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/11/11/dp%E6%80%BB%E7%BB%931/" class="archive-article-date">
+  	<time datetime="2020-11-11T06:30:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2020/11/11/dp%E6%80%BB%E7%BB%931/kangna.jpg" width="400" height="300"></p>
+<a id="more"></a>
+<h1 id="dp总结1"><a href="#dp总结1" class="headerlink" title="dp总结1"></a><center>dp总结1</center></h1><h2 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h2><h3 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h3><blockquote>
+<p>一个旅行者有一个最多能用m公斤的背包，现在有n件物品，它们的重量分别是W1，W2，…,Wn,它们的价值分别为C1,C2,…,Cn.若每种物品只有一件求旅行者能获得最大总价值。</p>
+<p>dp[i][j]表示前i件物品，容量为j的背包能获得的最大价值<br>那么，很明显直接的可以得到，dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - w[i]] + c[i])<br>dp[i - 1][j]意为不选择第i件物品，光是前i - 1件物品所能获得的最大价值<br>dp[i - 1][j - w[i]] + c[i]意为选择第i件物品所能获得的最大价值<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i]; j--)</span><br><span class="line">		dp[i][j] = max(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - w[i]] + c[i]);</span><br></pre></td></tr></table></figure></p>
+<p>这个代码的时间和空间复杂的都是O(m * n)，其中时间复杂度已经无法优化了，但是空间复杂的还可以优化到O(n)</p>
+</blockquote>
+<h2 id><a href="#" class="headerlink" title></a><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i]; j--)</span><br><span class="line">		dp[j] = max(dp[j], dp[j - w[i]] + c[i]);</span><br></pre></td></tr></table></figure></h2><h3 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h3><blockquote>
+<p> 设有n种物品，每种物品有一个重量及一个价值。但每种物品的数量是无限的，同时有一个背包，最大载重量为M，今从n种物品中选取若干件(同一种物品可以多次选取)，使其重量的和小于等于M，而价值的和为最大。</p>
+<p>注意上面代码的内层循环是从m到w[i]，因为每个物品只能选一次，所以不能对后续选择造成影响，所以只能从m到w[i]；然而现在是可以无限制选择，就是可以影响后续选择，所以只需要改一下内层循环的顺序就好了<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = w[i]; j &lt;= m; j++)</span><br><span class="line">		dp[j] = max(dp[j], dp[j - w[i]] + c[i]);</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h3><blockquote>
+<p>有N种物品和一个容量为V的背包。第i ii种物品最多有p[i]件可用，每件费用是w[i]，价值是c[i]。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>这里有一种很暴力的做法就是加上一重循环，从1遍历到p[i]<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= p[i]; k++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i] * k; j--)</span><br><span class="line">			dp[j] = max(dp[j], dp[j - w[i] * k] + c[i] * k);</span><br></pre></td></tr></table></figure><br>这种做法当然可以优化的，当我们进行了k=1和k=2之后紧接着就是k=3，可是k=3是冗余的，因为1和2的组合可以得到3，进行了k=4的循环后，5,6,7三次循环全是冗余的，因为1,2,4完全可以组合得到他们；同理我们只需要进行log(n)次循环就可以遍历0-p[i]所有的数了</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">	<span class="keyword">int</span> num = min(p[i], m / w[i]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; num &gt; <span class="number">0</span>; k &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (k &gt; num)    k = num;</span><br><span class="line">		num -= k;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i] * k; j--)</span><br><span class="line">			dp[j] = max(dp[j], dp[j - w[i] * k] + c[i] * k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2></blockquote>
+<h3 id="背包恰好装满"><a href="#背包恰好装满" class="headerlink" title="背包恰好装满"></a>背包恰好装满</h3><blockquote>
+<p>之前全是不超过背包最大容量，如果题目是恰好装满背包，其实就只需要在初始化dp的时候修改一下，dp[0] = 0，其他的位置全是负无穷， 用01背包举例<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="built_in">memset</span>(dp, -INF, <span class="keyword">sizeof</span>(dp));</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= w[i]; j--)</span><br><span class="line">		dp[j] = max(dp[j], dp[j - w[i]] + c[i])</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="分组背包"><a href="#分组背包" class="headerlink" title="分组背包"></a>分组背包</h3><blockquote>
+<p>有N件物品和一个容量为V的背包。第i件物品的费用是w[i]，价值是v[i]。这些物品被划分为若干组，每组中的物品互相冲突，最多选一件。求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p>总公司拥有高效设备M台，准备分给下属的N个分公司。各分公司若获得这些设备，可以为国家提供一定的盈利。问：如何分配这M台设备才能使国家得到的盈利最大？求出最大盈利值。其中M≤15，N≤10。分配原则：每个公司有权获得任意数目的设备，但总台数不超过设备数M。</p>
+<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>第一行有两个数，第一个数是分公司数N，第二个数是设备台数M。接下来是一个N*M的矩阵，表明了第 I个公司分配 J台机器的盈利。</p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>第一行输出最大盈利值。接下来的N行，每行2个整数，分别为分公司编号以及分配的机器数</p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>3 3<br>30 40 50<br>20 30 50<br>20 25 30</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>70<br>1 1<br>2 1<br>3 1<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">int</span> val[N][N], dp[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">int</span> k = m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dp[n][m] == dp[n - <span class="number">1</span>][m - i] + val[n][i]) &#123;</span><br><span class="line">            Print(n - <span class="number">1</span>, m - i);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, n, i);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m)) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(val, <span class="number">0</span>, <span class="keyword">sizeof</span> val);</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span> dp);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;val[i][j]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= j; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (dp[k][j] &lt; dp[k - <span class="number">1</span>][j - i] + val[k][i])</span><br><span class="line">                        dp[k][j] = dp[k - <span class="number">1</span>][j - i] + val[k][i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, dp[n][m]);</span><br><span class="line">        Print(n, m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h2 id="最长XX子序列"><a href="#最长XX子序列" class="headerlink" title="最长XX子序列"></a>最长XX子序列</h2><h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><blockquote>
+<p>求两个字符串的最长公共子序列<br>子序列：从原字符串选择某些字符，顺序不变连接，不要求位置连续<br>子串：从原字符串选择某些连续的字符，顺序不变连接<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">220</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s1[N], s2[N];</span><br><span class="line">    <span class="keyword">int</span> a[N][N];</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%s%s"</span>, s1 + <span class="number">1</span>, s2 + <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span> a);</span><br><span class="line">        <span class="keyword">int</span> len1 = <span class="built_in">strlen</span>(s1 + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> len2 = <span class="built_in">strlen</span>(s2 + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len1; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len2; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s1[i] == s2[j]) a[i][j] = a[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span>    a[i][j] = max(a[i - <span class="number">1</span>][j], a[i][j - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, a[len1][len2]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h3><p><a href="https://oj.wustacm.top/problem.php?id=1867&soj=0" target="_blank" rel="noopener">版子题</a></p>
+<details>
+
+<summary>ac代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1020</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, data[N], maxLen[N], lastPos[N] = &#123;<span class="number">-1</span>&#125;;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;data[i]);</span><br><span class="line">            maxLen[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (data[i] &gt; data[j] &amp;&amp; maxLen[j] + <span class="number">1</span> &gt; maxLen[i]) &#123;</span><br><span class="line">                    maxLen[i] = maxLen[j] + <span class="number">1</span>;</span><br><span class="line">                    pos = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            lastPos[i] = pos;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            <span class="keyword">if</span> (maxLen[ans] &lt; maxLen[i])</span><br><span class="line">                ans = i;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"max=%d\n"</span>, maxLen[ans]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> index = maxLen[ans], idx = index;</span><br><span class="line">        <span class="keyword">int</span> arr[N] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">while</span> (lastPos[ans] != <span class="number">-1</span>) &#123;</span><br><span class="line">            arr[index--] = data[ans];</span><br><span class="line">            ans = lastPos[ans];</span><br><span class="line">        &#125;</span><br><span class="line">        arr[index] = data[ans];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; idx; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, arr[idx]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<hr>
+<p><a href="https://oj.wustacm.top/problem.php?id=1864&soj=0" target="_blank" rel="noopener">还不错的题</a></p>
+<blockquote>
+<p>把城市左边按升序排好序之后，这个就是求最长上升子序列的题</p>
+</blockquote>
+<details>
+
+<summary>ac代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5002</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Line</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Line &amp;rhs) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> x &lt; rhs.x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">        Line a[N];</span><br><span class="line">        <span class="keyword">int</span> b[N], maxLen[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a[i].x, &amp;a[i].y);</span><br><span class="line">        sort(a, a + n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) b[i] = a[i].y, maxLen[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">                <span class="keyword">if</span> (b[i] &gt; b[j] &amp;&amp; maxLen[j] + <span class="number">1</span> &gt; maxLen[i])</span><br><span class="line">                    maxLen[i] = maxLen[j] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            <span class="keyword">if</span> (ans &lt; maxLen[i])    ans = maxLen[i];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><a href="https://oj.wustacm.top/problem.php?id=1863&soj=0" target="_blank" rel="noopener">高级数塔</a></p>
+<details>
+<summary>ac代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">202</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">        <span class="keyword">int</span> val[N], a[N][N] = &#123;<span class="number">0</span>&#125;, mv[N] = &#123;<span class="number">0</span>&#125;, dir[N] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;val[i]);</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y) &amp;&amp; x &amp;&amp; y) a[x][y] = <span class="number">1</span>;</span><br><span class="line">        mv[n] = val[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">                <span class="keyword">if</span> (a[i][j] &amp;&amp; mv[j] &gt; mv[index])   index = j;</span><br><span class="line">            mv[i] = mv[index] + val[i];</span><br><span class="line">            dir[i] = index;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> now = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)    <span class="keyword">if</span> (mv[i] &gt; mv[now])    now = i;</span><br><span class="line">        <span class="keyword">int</span> ans = mv[now];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, now);</span><br><span class="line">        <span class="keyword">while</span> (dir[now]) &#123;</span><br><span class="line">            now = dir[now];</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"-%d"</span>, now);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asstes/aliPay.png">                      >
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asstes/wxPay.png"">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -168,29 +269,153 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">最短路</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">dp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">背包</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wustzhh.github.io/2020/11/11/dp%E6%80%BB%E7%BB%931/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/07/16/C-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%A4%96%E7%BD%91%E6%98%A0%E5%B0%84tcp/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++网络编程外网映射tcp</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dp总结1"><span class="toc-number">1.</span> <span class="toc-text">dp总结1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背包"><span class="toc-number">1.1.</span> <span class="toc-text">背包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01背包"><span class="toc-number">1.1.1.</span> <span class="toc-text">01背包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">1
+2
+3
+for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+	for (int j &#x3D; m; j &gt;&#x3D; w[i]; j--)
+		dp[j] &#x3D; max(dp[j], dp[j - w[i]] + c[i]);
+</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#完全背包"><span class="toc-number">1.2.1.</span> <span class="toc-text">完全背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重背包"><span class="toc-number">1.2.2.</span> <span class="toc-text">多重背包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">1.3.</span> <span class="toc-text">1
+2
+3
+4
+5
+6
+7
+8
+9
+for(int i &#x3D; 1; i &lt;&#x3D; n; i++) &amp;#123;
+	int num &#x3D; min(p[i], m &#x2F; w[i]);
+	for (int k &#x3D; 1; num &gt; 0; k &lt;&lt;&#x3D; 1) &amp;#123;
+		if (k &gt; num)    k &#x3D; num;
+		num -&#x3D; k;
+		for (int j &#x3D; m; j &gt;&#x3D; w[i] * k; j--)
+			dp[j] &#x3D; max(dp[j], dp[j - w[i] * k] + c[i] * k);
+	&amp;#125;
+&amp;#125;
+</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#背包恰好装满"><span class="toc-number">1.3.1.</span> <span class="toc-text">背包恰好装满</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分组背包"><span class="toc-number">1.3.2.</span> <span class="toc-text">分组背包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#例题"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Input"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Input</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Output"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">Output</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sample-Input"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">Sample Input</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sample-Output"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">Sample Output</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最长XX子序列"><span class="toc-number">1.4.</span> <span class="toc-text">最长XX子序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最长公共子序列"><span class="toc-number">1.4.1.</span> <span class="toc-text">最长公共子序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最长上升子序列"><span class="toc-number">1.4.2.</span> <span class="toc-text">最长上升子序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">1.5.</span> <span class="toc-text">其他</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -213,9 +438,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
