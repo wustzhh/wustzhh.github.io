@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://wustzhh.github.io">
-  <title>Tag: 最短路 | zhh&#39;s Blogs</title>
+  <title>三角形 | zhh&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhh&#39;s Blogs">
-<meta property="og:url" content="https://wustzhh.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="三角形">
+<meta property="og:url" content="https://wustzhh.github.io/2020/12/17/%E4%B8%89%E8%A7%92%E5%BD%A2/index.html">
 <meta property="og:site_name" content="zhh&#39;s Blogs">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wustzhh.github.io/2020/12/17/%E4%B8%89%E8%A7%92%E5%BD%A2/%E7%BA%B1%E9%9B%BE.jpg">
+<meta property="article:published_time" content="2020-12-17T10:07:37.000Z">
+<meta property="article:modified_time" content="2020-12-17T11:02:39.113Z">
 <meta property="article:author" content="zhh">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wustzhh.github.io/2020/12/17/%E4%B8%89%E8%A7%92%E5%BD%A2/%E7%BA%B1%E9%9B%BE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhh&#39;s Blogs" type="application/atom+xml">
   
@@ -129,68 +133,221 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-三角形" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/05/%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstral%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-07-05T02:13:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/05/%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstral%E7%AE%97%E6%B3%95/">最短路Dijkstral算法</a>
+    <h1 class="article-title" itemprop="name">
+      三角形
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">最短路</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2020/12/17/%E4%B8%89%E8%A7%92%E5%BD%A2/" class="archive-article-date">
+  	<time datetime="2020-12-17T10:07:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2020/12/17/%E4%B8%89%E8%A7%92%E5%BD%A2/纱雾.jpg" width="297" height="364"></p>
+<a id="more"></a>
+<h1 id="三角形"><a href="#三角形" class="headerlink" title="三角形"></a><center>三角形</center></h1><p><a href="https://ac.nowcoder.com/acm/contest/9977/A" target="_blank" rel="noopener">三角形</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><blockquote>
+<p>题目就是给出一个数组，要从中找出三个数组成三角形，问这个三角形的最大周长和最小周长之差是多少<br>数据保证能组成三角形</p>
+</blockquote>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><blockquote>
+<p>首先对数组进行排序，先找最大的三角形，先看最大的三个数a,b,c(a &lt;= b &lt;= c)<br>如果a + b &gt; c说明他们可以组成三角形，即最大的周长就是a + b + c<br>如果不能组成三角形，则必然是c太大了，因为此时a和b就是剩下的所有数中，最大的两个，而此时a + b &lt;= c，说明只要选了c，必然找不到两个数可以和c组成三角形，所以毫不犹豫的舍弃c，然后看剩下的数中最大的三个数，如此反复，直到能组成三角形<br>这里的三条边是连续的三个数，如果不能组成三角形直接舍弃最大边</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>在看最小三角形还是规定三条边a,b,c(a &lt;= b &lt;= c)，所以它们的下标x,y,z是(x &lt; y &lt; z)<br>如果此时a,b,c可以组成三角形，且z = y + 2，那么可以推断array[x] + array[y] &gt; array[y + 2]，也可以推断出array[x] + array[y] &gt; array[y + 1]，由于array[y + 1] &lt;= array[y + 2]，所以后者是更好的选择<br>到这里可以推断出，最小三角形的最大的两条边是连续的，即z = y + 1，那么最小的那条边a &gt;= c - b + 1，并且此时a的下标不能超过y，等于都不可以<br>这里的b和c是连续的，利用这一点反过来推断a的大小和位置，如果找得到满足条件的数，说明最小三角形就找到了，否则就往后看</p>
+</blockquote>
+<hr>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><blockquote>
+<p>对于斐波那契数列，a[i + 1] = a[i] + a[i - 1]，此时根据较大的两条边确定第三条边为(a[i + 1] - a[i] + 1) = (a[i - 1] + 1), (a[i - 1] + 1)的下标刚好不比a[i]的下标i小，所以对于斐波那契数列，是一直都无法组成三角形的，而斐波那契数列的第50项就爆int了，所以如果存在合法的最小三角形，那么前50项左右就可以找到了<br>同理，最大三角形也是如此，后50项左右就可以出答案了<br>所以只需要用两次循环分别求最大最小周长就可以了，用一次循环找的话会慢一点</p>
+</blockquote>
+<h2 id="卡bug"><a href="#卡bug" class="headerlink" title="卡bug"></a>卡bug</h2><blockquote>
+<p>由于此题的数据太弱，像是<1,2,3,5,5>,<1,2,4,4,4>这种的数据完全没有，所以对最小三角形取三个连续的数判断，不满足则舍弃最小，这种做法也是能过题的</1,2,4,4,4></1,2,3,5,5></p>
+</blockquote>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><details>
+<summary>牛客正确ac代码</summary>
 
-          
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     * 返回在所有合法的三角形的组成中，最大的三角形的周长减去最小的三角形的周长的值</span></span><br><span class="line"><span class="comment">     * @param n int整型 代表题目中的n</span></span><br><span class="line"><span class="comment">     * @param a int整型vector 代表n个数的大小</span></span><br><span class="line"><span class="comment">     * @return int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> b[<span class="number">1020</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)    b[i] = a[i];</span><br><span class="line">        sort(b, b + n);</span><br><span class="line">        <span class="keyword">int</span> ma = <span class="number">0</span>, mm = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = b[i + <span class="number">1</span>] - b[i] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> pos = lower_bound(b, b + i, tmp) - b;</span><br><span class="line">            <span class="keyword">if</span> (pos &lt; i) &#123;</span><br><span class="line">                mm = b[pos] + b[i] + b[i + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i - <span class="number">1</span>] + b[i] &gt; b[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                ma = b[i - <span class="number">1</span>] + b[i] + b[i + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ma - mm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+</details>
+
+
+
+<details>
+<summary>牛客卡bug ac代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     * 返回在所有合法的三角形的组成中，最大的三角形的周长减去最小的三角形的周长的值</span></span><br><span class="line"><span class="comment">     * @param n int整型 代表题目中的n</span></span><br><span class="line"><span class="comment">     * @param a int整型vector 代表n个数的大小</span></span><br><span class="line"><span class="comment">     * @return int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">        sort(a.begin(), a.end());</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> min_sum, max_sum;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">int</span>(a.size()) - <span class="number">2</span>; i ++)</span><br><span class="line">            <span class="keyword">if</span> (a[i + <span class="number">2</span>] &lt; a[i] + a[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                min_sum = (<span class="keyword">long</span> <span class="keyword">long</span>)a[i] + a[i + <span class="number">1</span>] + a[i + <span class="number">2</span>];</span><br><span class="line">                <span class="keyword">break</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="keyword">int</span>(a.size()) - <span class="number">3</span>; i &gt;= <span class="number">0</span>; i --)</span><br><span class="line">            <span class="keyword">if</span> (a[i + <span class="number">2</span>] &lt; a[i] + a[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                max_sum = (<span class="keyword">long</span> <span class="keyword">long</span>)a[i] + a[i + <span class="number">1</span>] + a[i + <span class="number">2</span>];</span><br><span class="line">                <span class="keyword">break</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> max_sum - min_sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</details>
+
+
+<details>
+<summary>完整代码</summary>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e3</span> + <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[N], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line"></span><br><span class="line">        sort(a, a + n);</span><br><span class="line">        <span class="keyword">int</span> ma = <span class="number">-1</span>, mm = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = a[i + <span class="number">1</span>] - a[i] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> pos = lower_bound(a, a + i, tmp) - a;</span><br><span class="line">            <span class="keyword">if</span> (pos &lt; i) &#123;</span><br><span class="line">                mm = a[pos] + a[i] + a[i + <span class="number">1</span>];</span><br><span class="line">                <span class="comment">///printf("%d, %d, %d\n", a[pos], a[i], a[i + 1]);</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i] + a[i - <span class="number">1</span>] &gt; a[i + <span class="number">1</span>]) &#123;</span><br><span class="line">                ma = a[i - <span class="number">1</span>] + a[i] + a[i + <span class="number">1</span>];</span><br><span class="line">                <span class="comment">///printf("%d, %d, %d\n", a[i - 1], a[i], a[i + 1]);</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ma - mm);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">1 2 3 5 5</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">1 2 4 4 4</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">1 1 2 3 5 8 13 21 34 55</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">6</span></span><br><span class="line"><span class="comment">1 2 3 4 5 6</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+
+</details>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asstes/aliPay.png">                      >
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/asstes/wxPay.png"">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://wustzhh.github.io/2020/12/17/%E4%B8%89%E8%A7%92%E5%BD%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/11/29/%E5%AD%97%E5%85%B8%E6%A0%91%E5%B0%8F%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">字典树小结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#三角形"><span class="toc-number">1.</span> <span class="toc-text">三角形</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-number">1.2.</span> <span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化"><span class="toc-number">1.3.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#卡bug"><span class="toc-number">1.4.</span> <span class="toc-text">卡bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">1.5.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -213,9 +370,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
